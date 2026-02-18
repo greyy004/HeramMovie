@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+}
+
+/// Movies available for booking
+model Movie {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  durationMin Int        // duration in minutes
+  releaseDate DateTime?
+  showtimes   Showtime[]
+  createdAt   DateTime   @default(now())
+}
+
+/// Theaters that have screens
+model Theater {
+  id        Int      @id @default(autoincrement())
+  name      String
+  location  String
+  screens   Screen[]
+  createdAt DateTime @default(now())
+}
+
+/// Screens inside a theater
+model Screen {
+  id        Int        @id @default(autoincrement())
+  name      String
+  theater   Theater    @relation(fields: [theaterId], references: [id])
+  theaterId Int
+  seats     Seat[]
+  showtimes Showtime[]
+  createdAt DateTime   @default(now())
+}
+
+/// Showtimes for a movie on a screen
+model Showtime {
+  id        Int       @id @default(autoincrement())
+  movie     Movie     @relation(fields: [movieId], references: [id])
+  movieId   Int
+  screen    Screen    @relation(fields: [screenId], references: [id])
+  screenId  Int
+  startTime DateTime
+  endTime   DateTime
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+}
+
+/// Individual seats in a screen
+model Seat {
+  id         Int       @id @default(autoincrement())
+  screen     Screen    @relation(fields: [screenId], references: [id])
+  screenId   Int
+  seatNumber String
+  seatType   SeatType  @default(REGULAR)
+
+  // Many-to-many relation to Booking
+  bookings   Booking[] @relation("BookingSeats")
+}
+
+/// Booking made by a user for a showtime
+model Booking {
+  id         Int       @id @default(autoincrement())
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int
+  showtime   Showtime  @relation(fields: [showtimeId], references: [id])
+  showtimeId Int
+  createdAt  DateTime  @default(now())
+
+  // Many-to-many relation to Seat
+  seats      Seat[]    @relation("BookingSeats")
+}
+
+/// Seat type (regular, premium, VIP, etc.)
+enum SeatType {
+  REGULAR
+  PREMIUM
+  VIP
+}

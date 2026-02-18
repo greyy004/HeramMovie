@@ -1,0 +1,94 @@
+/* ===============================
+   Navbar Container
+================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 2rem;
+  height: 70px;
+
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ===============================
+   Brand / Logo
+================================= */
+.navbar-brand a {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #e50914;
+  letter-spacing: 1px;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-brand a:hover {
+  opacity: 0.8;
+}
+
+/* ===============================
+   Links Container
+================================= */
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+}
+
+/* ===============================
+   Individual Links
+================================= */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #e5e5e5;
+  transition: color 0.3s ease;
+}
+
+/* Hover Color */
+.nav-link:hover {
+  color: #ffffff;
+}
+
+/* Animated Underline */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #e50914;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ===============================
+   Responsive
+================================= */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .navbar-links {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+  }
+}

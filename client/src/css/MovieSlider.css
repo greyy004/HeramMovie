@@ -1,0 +1,140 @@
+/* ===============================
+   Page Container
+================================= */
+.movieSlide {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #111, #1c1c1c);
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===============================
+   Search Section
+================================= */
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  width: 350px;
+  max-width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 30px;
+  border: 1px solid #333;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #e50914;
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
+  outline: none;
+}
+
+.search-button {
+  padding: 0.9rem 1.8rem;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(45deg, #e50914, #ff1e2d);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(229, 9, 20, 0.5);
+}
+
+/* ===============================
+   Movies Grid
+================================= */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+/* ===============================
+   Movie Card
+================================= */
+.movie-card {
+  background: #181818;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Poster */
+.movie-card img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+}
+
+/* Content Section */
+.movie-card h3 {
+  font-size: 1.2rem;
+  margin: 1rem 1rem 0.5rem 1rem;
+  color: #ffffff;
+}
+
+.movie-card p {
+  font-size: 0.85rem;
+  margin: 0.3rem 1rem;
+  color: #cccccc;
+  line-height: 1.4;
+}
+
+/* Highlight Labels */
+.movie-card p strong {
+  color: #e50914;
+}
+
+/* ===============================
+   Scroll Feel
+================================= */
+.movieSlide::-webkit-scrollbar {
+  width: 8px;
+}
+
+.movieSlide::-webkit-scrollbar-thumb {
+  background-color: #e50914;
+  border-radius: 10px;
+}
+
+/* ===============================
+   Responsive
+================================= */
+@media (max-width: 768px) {
+  .search-input {
+    width: 100%;
+  }
+
+  .search-form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie-card img {
+    height: 320px;
+  }
+}
