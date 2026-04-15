@@ -18,13 +18,12 @@ app.use(express.urlencoded({ extended: true }));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Serve frontend static files
-const frontendPath = join(__dirname, '../client/dist');
-app.use(express.static(frontendPath));
+// Serve a plain static frontend from the project root public folder
+const publicPath = join(__dirname, '../public');
+app.use(express.static(publicPath));
 
-// Catch-all for React routes
-app.use((req, res) => {
-  res.sendFile(join(frontendPath, 'index.html'));
+app.get('/', (req, res) => {
+  res.sendFile(join(publicPath, 'index.html'));
 });
 
 // Start server
